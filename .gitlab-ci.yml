@@ -1,0 +1,47 @@
+image: python:latest
+
+stages:
+ - check
+ - test
+ - run
+
+quality_checker:
+  stage: check
+  before_script:
+   - echo "installing pylint"
+   - pip install pylint #install  pylint  (source-code, bug and quality checker)
+   - echo "installing pylint done"
+  script:
+   - echo "checking source code with pylint"
+   - pylint statistik.py #check source code statistik.py
+   - pylint statistik_main.py # check source code statistik_main.py
+   - echo "linting done"
+
+Unit_test:
+  stage: test
+  before_script:
+   - echo "I do something before_script"
+   - echo "I would like to see environment variables..."
+   - printenv
+   - echo "I would like to know who am I"
+   - whoami
+   - echo "I would like to see where am I"
+   - pwd
+   - python -V  # Print out python version
+  script:
+   - echo "start unit test"
+   - python -m unittest test_maximum  # run unit tests
+  after_script:
+   - echo "unit test done"
+
+run:
+  stage: run
+  before_script:
+   - echo "I would like to know who am I"
+   - whoami
+  script:
+   - python statistik_main.py  # run program
+  after_script:
+   - echo "That's it"
+  only:
+   - master

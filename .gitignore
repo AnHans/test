@@ -1,0 +1,9 @@
+#
+# Folgende Dateien aus der Versionierung ausschließen
+#
+._*
+#
+# Folgende Dateiverzeichnisse aus der Versionierung ausnehmen
+#
+__pycache__/
+.idea/
